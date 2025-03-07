@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение в кинорум 10Д класса</title>
+    <style>
+        body {
+            font-family: 'Segoe Print', cursive, sans-serif;
+            background-color: #fce4ec;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Убираем горизонтальный скроллинг */
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            animation: fadeIn 1s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .card {
+            transition: transform 0.3s ease; /* Плавное увеличение */
+        }
+
+        h1 {
+            font-family: 'Segoe Print', cursive, sans-serif;
+            color: #f06292;
+            font-size: 36px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideIn 1.5s forwards;
+        }
+
+        .invitation {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #4e4e4e;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInText 2s forwards 0.5s;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .address {
+            font-size: 18px;
+            color: #4e4e4e;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #f06292;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s ease-in-out;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInText 2s forwards 1s;
+        }
+
+        .button:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+
+        .flowers {
+            background-image: url('https://cdn.pixabay.com/photo/2015/12/14/03/32/flowers-1094310_960_720.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            border-radius: 8px;
+            color: #fff;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInText 2s forwards 1.5s;
+        }
+
+        .flowers h2 {
+            font-size: 24px;
+            text-align: center;
+            font-family: 'Segoe Print', cursive, sans-serif;
+            color: #fce4ec;
+        }
+
+        .footer {
+            animation: slideIn 1s forwards 2s;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .pink-text {
+            color: #FF69B4;
+            font-family: 'Segoe Print', cursive, sans-serif;
+            font-size: 20px;
+            font-style: italic;
+            text-shadow: 2px 2px 4px #000000; /* Черная обводка текста */
+        }
+
+        #nameDisplay {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container card"> <!-- Добавлен класс "card" -->
+        <h1>Дорогие одноклассницы!</h1>
+        <p class="invitation">
+            В честь Международного женского дня мы приглашаем вас провести чудесное время в киноруме! 🌸<br><br>
+            Мы соберемся вместе, чтобы в уютной атмосфере насладиться любимым фильмом, поговорить и просто отдохнуть в компании замечательных девочек. <br><br>
+            Время: <span class="time">17:00</span>.<br><br>
+            Не пропустите! Нам будет очень приятно видеть вас!
+        </p>
+
+        <!-- Форма для ввода имени -->
+        <form id="participationForm">
+            <label for="name">Введите ваше имя:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <input type="submit" class="button" value="Подтвердить участие">
+        </form>
+
+        <p class="address">Адрес: Алексей Петров, 31</p>
+
+        <div class="flowers">
+            <h2 class="pink-text">С любовью и вдохновением, Ваши одноклассники 10Д класса 🌷</h2>
+        </div>
+
+        <div class="footer">
+            Мы всегда рады встречам и веселью. Пусть этот день будет наполнен радостью и хорошим настроением!
+        </div>
+
+        <!-- Здесь будет отображаться введенное имя -->
+        <div id="nameDisplay"></div>
+    </div>
+
+    <script>
+        // Код для интерактивности при наведении на открытку
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.card');
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.transition = 'transform 0.3s ease';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Обработка формы и отображение введенного имени
+        const form = document.getElementById('participationForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            const name = document.getElementById('name').value; // Получаем введенное имя
+
+            // Отображаем имя на странице
+            const nameDisplay = document.getElementById('nameDisplay');
+            nameDisplay.textContent = `Спасибо за участие, ${name}! Мы вас ждем!`;
+
+            // Очистить поле ввода
+            document.getElementById('name').value = '';
+        });
+    </script>
+
+</body>
+</html>
